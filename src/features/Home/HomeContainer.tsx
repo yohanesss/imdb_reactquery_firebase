@@ -1,11 +1,18 @@
 import React from "react";
+import { HomeBanner } from "./HomeBanner";
+import { imagesDataPlaceholder } from "apis/data";
+import { MovieCollectionWidget } from "utils/components/MovieCollectionWidget";
 
 export const HomeContainer = () => {
   return (
     <div>
-      <h1 className="m-10 text-red-900 font-extrabold text-8xl transition-all font-sans hover:font-serif">
-        Test Tailwind
-      </h1>
+      <HomeBanner />
+      <div className="w-full md:w-11/12 m-auto h-full p-5">
+        <MovieCollectionWidget
+          movies={imagesDataPlaceholder}
+          collectionName="testcol"
+        />
+      </div>
     </div>
   );
 };
