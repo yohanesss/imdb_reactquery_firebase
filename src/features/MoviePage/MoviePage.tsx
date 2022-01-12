@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { ActorMovie, MovieItemType } from "types";
 import ReactImageMagnify from "react-image-magnify";
 import { MovieListDetail } from "./MovieListDetail";
+import moment from "moment";
 
 export const MoviePage = () => {
   const [movie, setMovie] = useState<MovieItemType | null>(null);
@@ -34,11 +35,20 @@ export const MoviePage = () => {
           <h1 className="text-5xl text-gray-700 mb-4">{movie.name}</h1>
           <ul>
             <MovieListDetail label="Genres" value={movie.genres.join(", ")} />
+            <MovieListDetail label="Type" value={movie.type} />
             <MovieListDetail
               label="Rating"
               value={movie.rating.average + " / 10 ⭐️"}
             />
             <MovieListDetail label="Status" value={movie.status} />
+            <MovieListDetail
+              label="Premiered"
+              value={moment(movie.premiered).format("dddd, MMMM Do YYYY")}
+            />
+            <MovieListDetail
+              label="Ended"
+              value={moment(movie.ended).format("dddd, MMMM Do YYYY")}
+            />
             <MovieListDetail
               label="Avg. runtime"
               value={movie.averageRuntime + " min"}
