@@ -1,0 +1,1 @@
+export { getCollectionByQuery } from "./tvMaze";

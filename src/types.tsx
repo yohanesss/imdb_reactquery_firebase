@@ -51,25 +51,14 @@ export type MovieItemType = {
   };
 };
 
-const data = {
-  character: {
-    id: 1,
-    url: "https://www.tvmaze.com/characters/1/under-the-dome-dale-barbie-barbara",
-    name: "Dale Barbie Barbara",
-    image: {
-      medium:
-        "https://static.tvmaze.com/uploads/images/medium_portrait/0/3.jpg",
-      original:
-        "https://static.tvmaze.com/uploads/images/original_untouched/0/3.jpg",
-    },
-    _links: {
-      self: {
-        href: "https://api.tvmaze.com/characters/1",
-      },
-    },
-  },
-  self: false,
-  voice: false,
+export type movieCollectionBasic = {
+  score: number;
+  show: MovieItemType;
+};
+
+export type moviesCollectionType = {
+  collectionName: string;
+  collection: movieCollectionBasic[];
 };
 
 export type ActorMovie = {

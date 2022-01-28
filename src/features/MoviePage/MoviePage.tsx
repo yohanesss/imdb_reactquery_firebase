@@ -34,25 +34,35 @@ export const MoviePage = () => {
         <div className="basis-3/4 p-2">
           <h1 className="text-5xl text-gray-700 mb-4">{movie.name}</h1>
           <ul>
-            <MovieListDetail label="Genres" value={movie.genres.join(", ")} />
+            {movie?.genres?.length > 0 && (
+              <MovieListDetail label="Genres" value={movie.genres.join(", ")} />
+            )}
             <MovieListDetail label="Type" value={movie.type} />
-            <MovieListDetail
-              label="Rating"
-              value={movie.rating.average + " / 10 ⭐️"}
-            />
+            {movie?.rating?.average && (
+              <MovieListDetail
+                label="Rating"
+                value={movie.rating.average + " / 10 ⭐️"}
+              />
+            )}
             <MovieListDetail label="Status" value={movie.status} />
-            <MovieListDetail
-              label="Premiered"
-              value={moment(movie.premiered).format("dddd, MMMM Do YYYY")}
-            />
-            <MovieListDetail
-              label="Ended"
-              value={moment(movie.ended).format("dddd, MMMM Do YYYY")}
-            />
-            <MovieListDetail
-              label="Avg. runtime"
-              value={movie.averageRuntime + " min"}
-            />
+            {movie?.premiered && (
+              <MovieListDetail
+                label="Premiered"
+                value={moment(movie.premiered).format("dddd, MMMM Do YYYY")}
+              />
+            )}
+            {movie?.ended && (
+              <MovieListDetail
+                label="Ended"
+                value={moment(movie.ended).format("dddd, MMMM Do YYYY")}
+              />
+            )}
+            {movie?.averageRuntime && (
+              <MovieListDetail
+                label="Avg. runtime"
+                value={movie.averageRuntime + " min"}
+              />
+            )}
           </ul>
           {cast.length > 0 && (
             <>
@@ -65,7 +75,7 @@ export const MoviePage = () => {
                   >
                     <img
                       className="w-1/2 mr-2"
-                      src={p.person.image.medium}
+                      src={p.person.image?.medium}
                       alt={p.person.name}
                     />
                     <div>
