@@ -1,5 +1,8 @@
-import { MovieItemType } from "types";
-import { moviesCollectionType } from "./../types";
+import {
+  movieCollectionBasic,
+  MovieItemType,
+  moviesCollectionType,
+} from "types";
 const BASE_API_URL = "https://api.tvmaze.com/";
 
 export const getCollectionByQuery = async (
@@ -13,9 +16,16 @@ export const getCollectionByQuery = async (
   };
 };
 
+export const searchShows = async (
+  query: string
+): Promise<movieCollectionBasic[]> => {
+  const shows = await fetch(`${BASE_API_URL}search/shows?q=${query}`);
+  return await shows.json();
+};
+
 export const getAllShows = async (
   page: number = 1
 ): Promise<MovieItemType[]> => {
-  const getAllShows = await fetch(`https://api.tvmaze.com/shows?page=${page}`);
+  const getAllShows = await fetch(`${BASE_API_URL}shows?page=${page}`);
   return await getAllShows.json();
 };

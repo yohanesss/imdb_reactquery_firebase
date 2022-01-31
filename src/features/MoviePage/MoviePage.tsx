@@ -27,7 +27,7 @@ export const MoviePage = () => {
       </Link>
       <div className="flex">
         <div className="basis-1/4 p-2">
-          <img src={movie.image.original} alt={movie.name} />
+          <img src={movie?.image?.original} alt={movie.name} />
           <h2 className="text-2xl text-orange-700 my-4 underline">Summary</h2>
           <p dangerouslySetInnerHTML={{ __html: movie.summary }}></p>
         </div>
