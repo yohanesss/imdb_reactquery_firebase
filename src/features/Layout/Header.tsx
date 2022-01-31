@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "features/Layout";
+import { SearchBar } from "./SearchBar";
 
 const cart = {
   data: {
@@ -17,13 +18,22 @@ export const Header = () => {
             <Logo />
           </Link>
         </div>
-        <div className="w-6/12 flex justify-center items-center">
-          <input
-            className="w-full leading-5 p-2 rounded-md border border-slate-200 outline-none focus:bg-neutral-100"
-            type="text"
-          />
+        <div className="w-7/12 flex justify-center items-center">
+          <div
+            className="flex justify-between items-center"
+            style={{ width: "100%" }}
+          >
+            <div className="w-2/12 flex justify-center items-center">
+              <Link to="/all-shows">
+                <button className="p-2 bg-gray-800 text-white rounded-md">
+                  View All
+                </button>
+              </Link>
+            </div>
+            <SearchBar />
+          </div>
         </div>
-        <div className="w-3/12 flex justify-end items-center">
+        <div className="w-2/12 flex justify-end items-center">
           <Link to="/cart">
             <button className="hover:underline relative">
               <img

@@ -70,6 +70,7 @@ export const MoviePage = () => {
               <div className="flex flex-wrap">
                 {cast.map((p) => (
                   <div
+                    key={p.character.id}
                     className="flex shadow-lg m-2 p-2"
                     style={{ flexBasis: "calc(25% - 4rem)", minWidth: "188px" }}
                   >
