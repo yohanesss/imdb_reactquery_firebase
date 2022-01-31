@@ -1,12 +1,20 @@
 import React, { useState } from "react";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 export const SearchBar = () => {
   const [input, setInput] = useState("");
+  const navigate = useNavigate();
+  const params = { q: "" };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input) return;
-    console.log(input);
+    params.q = input;
+
+    navigate({
+      pathname: "/search",
+      search: `?${createSearchParams(params)}`,
+    });
   };
 
   return (
