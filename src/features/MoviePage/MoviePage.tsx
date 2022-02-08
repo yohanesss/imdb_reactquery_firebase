@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ActorMovie, MovieItemType } from "types";
-import ReactImageMagnify from "react-image-magnify";
 import { MovieListDetail } from "./MovieListDetail";
 import moment from "moment";
+import { getCast, getShow } from "apis/tvMaze";
+import { useQuery } from "react-query";
 
 export const MoviePage = () => {
-  const [movie, setMovie] = useState<MovieItemType | null>(null);
-  const [cast, setCast] = useState<ActorMovie[] | []>([]);
   const { id } = useParams();
 
-  useEffect(() => {
-    fetch(`https://api.tvmaze.com/shows/${id}`)
-      .then((data) => data.json())
-      .then((movie) => setMovie(movie));
+  const { error: isErrorMovie, data: movie } = useQuery<MovieItemType, Error>(
+    ["movie", id],
+    async () => await getShow(id || "")
+  );
 
-    fetch(`https://api.tvmaze.com/shows/${id}/cast`)
-      .then((data) => data.json())
-      .then((cast) => setCast(cast));
-  }, [id]);
+  const { data: cast } = useQuery<ActorMovie[], Error>(
+    ["movie", ["cast", id]],
+    async () => await getCast(id || "")
+  );
 
   const renderMovieDetail = (movie: MovieItemType) => (
     <div className="w-full md:w-11/12 m-auto h-full p-5">
@@ -64,7 +63,7 @@ export const MoviePage = () => {
               />
             )}
           </ul>
-          {cast.length > 0 && (
+          {cast && cast.length > 0 && (
             <>
               <h2 className="text-3xl text-orange-700 my-4 underline">Cast</h2>
               <div className="flex flex-wrap">
@@ -94,5 +93,15 @@ export const MoviePage = () => {
     </div>
   );
 
-  return <div>{movie ? renderMovieDetail(movie) : <h1>Loading...</h1>}</div>;
+  return (
+    <div>
+      {movie ? (
+        renderMovieDetail(movie)
+      ) : isErrorMovie ? (
+        "Error Loading Movie!"
+      ) : (
+        <h1>Loading...</h1>
+      )}
+    </div>
+  );
 };

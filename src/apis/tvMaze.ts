@@ -1,3 +1,4 @@
+import { ActorMovie } from "./../types";
 import {
   movieCollectionBasic,
   MovieItemType,
@@ -23,9 +24,20 @@ export const searchShows = async (
   return await shows.json();
 };
 
+export const getShow = async (id: string): Promise<MovieItemType> => {
+  const show = await fetch(`https://api.tvmaze.com/shows/${id}`);
+  return await show.json();
+};
+
+export const getCast = async (id: string): Promise<ActorMovie[]> => {
+  const cast = await fetch(`https://api.tvmaze.com/shows/${id}/cast`);
+  return await cast.json();
+};
+
 export const getAllShows = async (
   page: number = 1
-): Promise<MovieItemType[]> => {
+): Promise<{ data: MovieItemType[]; nextPage: number }> => {
   const getAllShows = await fetch(`${BASE_API_URL}shows?page=${page}`);
-  return await getAllShows.json();
+  console.log("nextPage", page + 1);
+  return { data: await getAllShows.json(), nextPage: page + 1 };
 };

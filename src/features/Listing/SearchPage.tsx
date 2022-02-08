@@ -1,4 +1,4 @@
-import { getAllShows, searchShows } from "apis/tvMaze";
+import { searchShows } from "apis/tvMaze";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { movieCollectionBasic } from "types";
