@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { HomeBanner } from "./HomeBanner";
-import { imagesDataPlaceholder } from "apis/data";
 import { MovieCollectionWidget } from "utils/components/MovieCollectionWidget";
-import { movieCollectionBasic, moviesCollectionType } from "types";
+import { moviesCollectionType } from "types";
 import { getCollectionByQuery } from "apis";
 import { useQuery } from "react-query";
 

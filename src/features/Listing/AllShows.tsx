@@ -1,5 +1,4 @@
 import { getAllShows } from "apis/tvMaze";
-import React, { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { MovieItemType } from "types";
 import { MovieCard } from "utils/components/MovieCard";

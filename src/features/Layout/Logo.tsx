@@ -1,4 +1,3 @@
-import React from "react";
 import compLogo from "assets/logo.png";
 
 export const Logo = () => {

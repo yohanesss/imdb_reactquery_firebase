@@ -1,28 +1,21 @@
 import { searchShows } from "apis/tvMaze";
-import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import { movieCollectionBasic } from "types";
 import { MovieCard } from "utils/components/MovieCard";
 
 export const SearchPage = () => {
-  const [shows, setShows] = useState<movieCollectionBasic[] | []>([]);
   const [searchParam] = useSearchParams();
   const query = searchParam.get("q");
 
-  useEffect(() => {
-    let didCancel = false;
-    if (query?.length && !didCancel) {
-      searchShows(query).then((shows) => setShows(shows));
-    }
-
-    return () => {
-      didCancel = true;
-    };
-  }, [query]);
+  const { data: shows } = useQuery<movieCollectionBasic[], Error>(
+    ["search", query],
+    () => searchShows(query || "")
+  );
 
   const renderShows = () => (
     <div className="flex flex-wrap gap-4 justify-start">
-      {shows.map(({ show }) => (
+      {shows?.map(({ show }) => (
         <MovieCard key={show.id} movie={show} />
       ))}
     </div>
@@ -35,7 +28,7 @@ export const SearchPage = () => {
           Showing result for "{query}"
         </h1>
       )}
-      {shows?.length > 0 && renderShows()}
+      {shows && shows?.length > 0 && renderShows()}
     </div>
   );
 };

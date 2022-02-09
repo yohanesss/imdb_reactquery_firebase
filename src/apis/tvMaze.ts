@@ -38,6 +38,5 @@ export const getAllShows = async (
   page: number = 1
 ): Promise<{ data: MovieItemType[]; nextPage: number }> => {
   const getAllShows = await fetch(`${BASE_API_URL}shows?page=${page}`);
-  console.log("nextPage", page + 1);
   return { data: await getAllShows.json(), nextPage: page + 1 };
 };
