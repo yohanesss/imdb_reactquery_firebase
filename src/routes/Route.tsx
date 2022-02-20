@@ -1,7 +1,9 @@
 import { HomeContainer } from "features/Home/HomeContainer";
 import { AllShows, SearchPage } from "features/Listing";
 import { MoviePage } from "features/MoviePage/MoviePage";
+import { WishlistContainer } from "features/Wishlist/WishlistContainer";
 import { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 
 interface IRoute {
   path: string;
@@ -21,7 +23,7 @@ export const routes: IRoute[] = [
     path: "/all-shows",
     element: <AllShows />,
     name: "All Shows",
-    protected: true,
+    protected: false,
   },
   {
     path: "/search",
@@ -33,6 +35,18 @@ export const routes: IRoute[] = [
     path: "/movies/:id",
     element: <MoviePage />,
     name: "Movie Page",
+    protected: false,
+  },
+  {
+    path: "/wishlist",
+    element: <WishlistContainer />,
+    name: "WishList",
+    protected: false,
+  },
+  {
+    path: "/*",
+    element: <Navigate to="/" />,
+    name: "Not Found!",
     protected: false,
   },
 ];

@@ -6,12 +6,14 @@
     "daruma",
     "Encylopedia",
     "firebaseapp",
+    "firestore",
     "IMDB",
     "previousepisode",
     "Spongebob",
     "tailwindcss",
     "Tcya",
     "thetvdb",
-    "tvrage"
+    "tvrage",
+    "unsubsribe"
   ]
 }

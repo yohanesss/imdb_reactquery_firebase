@@ -6,17 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { AuthProvider } from "hooks/useAuth";
 
 const client = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
-    <QueryClientProvider client={client}>
-      <Router>
-        <App />
-      </Router>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={client}>
+        <Router>
+          <App />
+        </Router>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

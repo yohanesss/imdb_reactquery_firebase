@@ -8,6 +8,9 @@
 .env
 
 devel_notes.txt
+test.js
+test.liquid
+a.liquid
 
 # testing
 /coverage

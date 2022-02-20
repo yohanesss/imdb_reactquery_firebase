@@ -1,14 +1,36 @@
 import { Link } from "react-router-dom";
+import { AuthProvider } from "firebase/auth";
 import { Logo } from "features/Layout";
 import { SearchBar } from "./SearchBar";
-
-const cart = {
-  data: {
-    products: [],
-  },
-};
+import { FirebaseError } from "@firebase/util";
+import {
+  auth,
+  Providers,
+  SignInWithSocialMedia,
+  logOut,
+} from "../../apis/firebase";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "hooks/useAuth";
 
 export const Header = () => {
+  const [authenticating, setAuthenticating] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { user, favorite } = useAuth();
+
+  const signInWithSocialMedia = async (provider: AuthProvider) => {
+    try {
+      const signIn = await SignInWithSocialMedia(provider);
+      if (signIn) navigate("/");
+    } catch (error: unknown) {
+      if (error instanceof FirebaseError) {
+        setError(error.message);
+        console.error(error.message);
+      }
+    }
+  };
+
   return (
     <header className="h-16 w-full bg-white sticky top-0 border-b border-gray-100 shadow-md z-10">
       <nav className="w-full md:w-11/12 m-auto h-full p-5 flex items-center">
@@ -40,28 +62,32 @@ export const Header = () => {
                 src="https://daruma.co.id/static/images/logo-cart.png"
                 alt="cart"
               />
-              {cart && cart.data && (
+              {favorite && favorite.data && (
                 <span className="absolute top-0 right-0 bg-red-700 text-white px-1 rounded-full text-sm -mr-2">
-                  {cart.data.products.length}
+                  {favorite.data.products.length}
                 </span>
               )}
             </button>
           </Link>
-          {/* {user ? (
+          {user ? (
             <button
               className="hover:underline"
               onClick={() => {
-                signOut();
+                logOut();
                 navigate("/");
               }}
             >
               Logout
             </button>
           ) : (
-            <Link to="/login">
-              <button className="hover:underline">Register / Login</button>
-            </Link>
-          )} */}
+            <button
+              disabled={authenticating}
+              onClick={() => signInWithSocialMedia(Providers.google)}
+              className="hover:underline"
+            >
+              Login With Google
+            </button>
+          )}
         </div>
       </nav>
     </header>

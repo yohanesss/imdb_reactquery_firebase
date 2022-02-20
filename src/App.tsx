@@ -24,10 +24,6 @@ function App() {
             }
           />
         ))}
-        <Route path="/" element={<HomeContainer />} />
-        <Route path="/all-shows" element={<AllShows />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/movies/:id" element={<MoviePage />} />
       </Routes>
     </LayoutContainer>
   );
