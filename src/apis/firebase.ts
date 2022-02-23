@@ -38,7 +38,7 @@ export const getFavoriteByDoc = async (uid: string) =>
   await db.collection("favorite").doc(uid);
 
 export const getUserFavorite = async (uid: string) => {
-  const favorites = await db.collection("favofite").doc(uid).get();
+  const favorites = await db.collection("favorite").doc(uid).get();
 
   return {
     data: await favorites.data(),

@@ -39,7 +39,7 @@ export const Header = () => {
             <Logo />
           </Link>
         </div>
-        <div className="w-7/12 flex justify-center items-center">
+        <div className="w-6/12 flex justify-center items-center">
           <div
             className="flex justify-between items-center"
             style={{ width: "100%" }}
@@ -54,17 +54,22 @@ export const Header = () => {
             <SearchBar />
           </div>
         </div>
-        <div className="w-2/12 flex justify-end items-center">
-          <Link to="/cart">
-            <button className="hover:underline relative">
-              <img
-                style={{ width: 25, marginTop: 10 }}
-                src="https://daruma.co.id/static/images/logo-cart.png"
-                alt="cart"
-              />
-              {favorite && favorite.data && (
-                <span className="absolute top-0 right-0 bg-red-700 text-white px-1 rounded-full text-sm -mr-2">
-                  {favorite.data.products.length}
+        <div className="w-3/12 flex justify-end items-center">
+          <Link to="/wishlist">
+            <button className="hover:underline relative mr-4">
+              <div>❤️ Favorite</div>
+              {favorite && favorite?.data && (
+                <span
+                  className="absolute top-0 right-0 bg-red-700 text-white px-1 rounded-full text-sm -mr-2"
+                  style={{
+                    right: -6,
+                    top: -5,
+                    fontSize: "10px",
+                    padding: "0px 8px",
+                    /* display: block; */
+                  }}
+                >
+                  {favorite?.data?.movies.length}
                 </span>
               )}
             </button>

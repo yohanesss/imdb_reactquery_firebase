@@ -61,6 +61,12 @@ export type moviesCollectionType = {
   collection: movieCollectionBasic[];
 };
 
+export type FavoriteMovieType = {
+  name: string;
+  movieId: string | number;
+  image_url: string;
+};
+
 export type ActorMovie = {
   person: {
     id: number;
